@@ -6,10 +6,15 @@ namespace MovieApp.Controllers
     public class MoviesController : Controller
     {
         //action
-        //localhost:7033/movies/list
-        public string List()
+
+        public IActionResult Index()
         {
-            return "Movie List";
+            return View();
+        }
+        //localhost:7033/movies/list
+        public IActionResult List()
+        {
+            return View("Movies");
         }
 
         //localhost:7033/movies/details

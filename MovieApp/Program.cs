@@ -19,18 +19,8 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseEndpoints(endpoints =>
 {
-    //localhost:7033
     endpoints.MapControllerRoute(
-        name: "home", pattern: "", defaults: new { controller = "Home", action = "Index" });
-    //localhost:7033/about
-    endpoints.MapControllerRoute(
-        name: "about", pattern: "/about", defaults: new { controller = "Home", action = "About" });
-    //localhost:7033/movies/list
-    endpoints.MapControllerRoute(
-        name: "movieList", pattern: "movies/list", defaults: new { controller = "Movies", action = "List" });
-    //localhost:7033/movies/details
-    endpoints.MapControllerRoute(
-        name: "movieDetails", pattern: "movies/details", defaults: new { controller = "Movies", action = "Details" });
+        name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.UseAuthorization();

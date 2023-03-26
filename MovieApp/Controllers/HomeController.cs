@@ -5,14 +5,14 @@ namespace MovieApp.Controllers
     public class HomeController : Controller
     {
         //localhost:7033
-        public string Index()
+        public IActionResult Index()
         {
-            return "Homepage";
+            return View();
         }
         //localhost:7033/about
-        public string About()
+        public IActionResult About()
         {
-            return "About us";
+            return View();
         }
     }
 }
