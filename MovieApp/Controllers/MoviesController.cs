@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieApp.Models;
 
 namespace MovieApp.Controllers
 {
@@ -6,15 +7,21 @@ namespace MovieApp.Controllers
     public class MoviesController : Controller
     {
         //action
-
+        //localhost:7033/movies/list
         public IActionResult Index()
         {
             return View();
         }
-        //localhost:7033/movies/list
+
         public IActionResult List()
         {
-            return View("Movies");
+            var movieList = new List<Movie>()
+            {
+                new Movie(){Title = "Movie 1", Description = "Description 1", Director = "Director 1", Actors = new string[]{"actor 1", "actor 2"}},
+                new Movie(){Title = "Movie 2", Description = "Description 2", Director = "Director 2", Actors = new string[]{"actor 1", "actor 2"}},
+                new Movie(){Title = "Movie 3", Description = "Description 3", Director = "Director 3", Actors = new string[]{"actor 1", "actor 2"}}
+            };
+            return View("Movies",movieList);
         }
 
         //localhost:7033/movies/details

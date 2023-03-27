@@ -1,8 +1,18 @@
-﻿@model MovieApp.Models.Movie
+﻿@model Movie
 @{
     ViewData["Title"] = "Home Page";
 }
-
+<head>
+    <title></title>
+    <style>
+        .movie {
+            border: 1px solid #000000;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
 <h1>Movie List</h1>
 <div id="movies">
     <div class="movie">
@@ -19,3 +29,5 @@
         </p>
     </div>
 </div>
+</body>
+
