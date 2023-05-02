@@ -1,9 +1,9 @@
-﻿@model List<Movie>
+﻿@model MovieGenreViewModel
 
 <h1>Movie List</h1>
 <div id="movies">
 
-    @foreach (var movie in Model)
+    @foreach (var movie in Model.Movies)
     {
         @await Html.PartialAsync("_movie", movie)
     }
@@ -11,5 +11,5 @@
 
 @section menu
 {
-    @await Html.PartialAsync("_menu")
+    @await Html.PartialAsync("_menu", Model.Genres)
 }

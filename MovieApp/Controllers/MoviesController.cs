@@ -21,7 +21,21 @@ namespace MovieApp.Controllers
                 new Movie(){Title = "Movie 2", Description = "Description 2", Director = "Director 2", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "2.jpg"},
                 new Movie(){Title = "Movie 3", Description = "Description 3", Director = "Director 3", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "3.jpg"}
             };
-            return View("Movies",movieList);
+
+            var genreList = new List<Genre>()
+            {
+                new Genre {Name = "Adventure"},
+                new Genre {Name = "Comedy"},
+                new Genre {Name = "Action"},
+                new Genre {Name = "Sci-Fi"}
+            };
+
+            var model = new MovieGenreViewModel()
+            {
+                Movies = movieList, Genres = genreList
+            };
+
+            return View("Movies", model);
         }
 
         //localhost:7033/movies/details
