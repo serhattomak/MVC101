@@ -1,8 +1,5 @@
 ﻿@model Movie
-@{
-    ViewData["Title"] = "Home Page";
-    Layout = "_Layout2";
-}
+@await Html.PartialAsync("_header")
 
 <h1>Movie List</h1>
 <div id="movies">
