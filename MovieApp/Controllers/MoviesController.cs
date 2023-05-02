@@ -22,17 +22,9 @@ namespace MovieApp.Controllers
                 new Movie(){Title = "Movie 3", Description = "Description 3", Director = "Director 3", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "3.jpg"}
             };
 
-            var genreList = new List<Genre>()
-            {
-                new Genre {Name = "Adventure"},
-                new Genre {Name = "Comedy"},
-                new Genre {Name = "Action"},
-                new Genre {Name = "Sci-Fi"}
-            };
-
             var model = new MovieGenreViewModel()
             {
-                Movies = movieList, Genres = genreList
+                Movies = movieList
             };
 
             return View("Movies", model);
