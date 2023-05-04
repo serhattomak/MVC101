@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MovieApp.Data;
 using MovieApp.Models;
 
 namespace MovieApp.ViewComponents
@@ -7,15 +8,7 @@ namespace MovieApp.ViewComponents
     {
         public IViewComponentResult Invoke()
         {
-            var genreList = new List<Genre>()
-            {
-                new Genre {Name = "Adventure"},
-                new Genre {Name = "Comedy"},
-                new Genre {Name = "Action"},
-                new Genre {Name = "Sci-Fi"}
-            };
-
-            return View(genreList);
+            return View(GenreRepository.Genres);
         }
     }
 }

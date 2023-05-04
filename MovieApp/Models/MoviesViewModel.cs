@@ -1,8 +1,7 @@
 ﻿namespace MovieApp.Models
 {
-    public class MovieGenreViewModel
+    public class MoviesViewModel
     {
         public List<Movie> Movies { get; set; }
-        public List<Genre> Genres { get; set; }
     }
 }

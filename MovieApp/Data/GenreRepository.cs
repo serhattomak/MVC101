@@ -7,10 +7,13 @@ namespace MovieApp.Data
 
         static GenreRepository()
         {
-            new Genre { GenreId = 1, Name = "adventure" },
-            new Genre { GenreId = 2, Name = "Comedy" },
-            new Genre { GenreId = 3, Name = "Action" },
-            new Genre { GenreId = 4, Name = "Sci-Fi" }
+            _genres = new List<Genre>()
+            {
+                new Genre { GenreId = 1, Name = "Adventure" },
+                new Genre { GenreId = 2, Name = "Comedy" },
+                new Genre { GenreId = 3, Name = "Action" },
+                new Genre { GenreId = 4, Name = "Sci-Fi" }
+            };
         }
 
         public static List<Genre> Genres
