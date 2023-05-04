@@ -24,10 +24,10 @@ namespace MovieApp.Controllers
             return View("Movies", model);
         }
 
-        //localhost:7033/movies/details
-        public string Details()
+        //localhost:7033/movies/details/
+        public IActionResult Details(int id)
         {
-            return "Movie Detail";
+            return View(MovieRepository.GetById(id));
         }
     }
 }
