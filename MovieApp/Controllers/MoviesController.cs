@@ -14,17 +14,26 @@ namespace MovieApp.Controllers
             return View();
         }
 
-        public IActionResult List()
+        //localhost:7033/movies/list
+        //localhost:7033/movies/list/1
+        public IActionResult List(int? id)
         {
+            var movies = MovieRepository.Movies;
+
+            if (id != null)
+            {
+                movies = movies.Where(m => m.GenreId == id).ToList();
+            }
+
             var model = new MoviesViewModel()
             {
-                Movies = MovieRepository.Movies
+                Movies = movies
             };
 
             return View("Movies", model);
         }
 
-        //localhost:7033/movies/details/
+        //localhost:7033/movies/details/1
         public IActionResult Details(int id)
         {
             return View(MovieRepository.GetById(id));

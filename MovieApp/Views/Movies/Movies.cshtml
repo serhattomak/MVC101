@@ -2,10 +2,17 @@
 
 <h1>Movie List</h1>
 <div id="movies">
-
-    @foreach (var movie in Model.Movies)
+    
+    @if (Model.Movies.Count() > 0)
     {
-        @await Html.PartialAsync("_movie", movie)
+        @foreach (var movie in Model.Movies)
+        {
+            @await Html.PartialAsync("_movie", movie)
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">Movie couldn't found.</div>
     }
 </div>
 
