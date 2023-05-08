@@ -12,7 +12,8 @@ namespace MovieApp.Data
                 new Genre { GenreId = 1, Name = "Adventure" },
                 new Genre { GenreId = 2, Name = "Comedy" },
                 new Genre { GenreId = 3, Name = "Action" },
-                new Genre { GenreId = 4, Name = "Sci-Fi" }
+                new Genre { GenreId = 4, Name = "Sci-Fi" },
+                new Genre { GenreId = 5, Name = "Drama" }
             };
         }
 
