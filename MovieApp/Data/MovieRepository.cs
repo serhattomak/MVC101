@@ -29,6 +29,7 @@ namespace MovieApp.Data
 
         public static void Add(Movie movie)
         {
+            movie.MovieId = _movies.Count() + 1;
             _movies.Add(movie);
         }
 
