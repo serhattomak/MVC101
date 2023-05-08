@@ -16,7 +16,7 @@ namespace MovieApp.Controllers
 
         //localhost:7033/movies/list
         //localhost:7033/movies/list/1
-        public IActionResult List(int? id)
+        public IActionResult List(int? id, string q)
         {
             // {controller}/{action}/{id?}
             // movies/list/2
@@ -24,12 +24,18 @@ namespace MovieApp.Controllers
             //var controller = RouteData.Values["controller"];
             //var action = RouteData.Values["action"];
             //var genreid = RouteData.Values["id"];
+            //var word = HttpContext.Request.Query["q"].ToString();
 
             var movies = MovieRepository.Movies;
 
             if (id != null)
             {
                 movies = movies.Where(m => m.GenreId == id).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                movies = movies.Where(i => i.Title.ToLower().Contains(q.ToLower()) || i.Description.ToLower().Contains(q.ToLower())).ToList();
             }
 
             var model = new MoviesViewModel()

@@ -10,12 +10,12 @@ namespace MovieApp.Data
         {
             _movies = new List<Movie>()
             {
-                new Movie(){MovieId = 1, Title = "Movie 1", Description = "Description 1", Director = "Director 1", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "1.jpg", GenreId = 1},
-                new Movie(){MovieId = 2, Title = "Movie 2", Description = "Description 2", Director = "Director 2", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "2.jpg", GenreId = 1},
-                new Movie(){MovieId = 3, Title = "Movie 3", Description = "Description 3", Director = "Director 3", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "3.jpg", GenreId = 3},
-                new Movie(){MovieId = 4, Title = "Movie 4", Description = "Description 4", Director = "Director 4", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "1.jpg", GenreId = 3},
-                new Movie(){MovieId = 5, Title = "Movie 5", Description = "Description 5", Director = "Director 5", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "2.jpg", GenreId = 3},
-                new Movie(){MovieId = 6, Title = "Movie 6", Description = "Description 6", Director = "Director 6", Actors = new string[]{"actor 1", "actor 2"}, ImageUrl = "3.jpg", GenreId = 4}
+                new Movie(){MovieId = 1, Title = "Inception", Description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.", Director = "Christopher Nolan", Actors = new string[]{"Leonardo DiCaprio", "Joseph Gordon-Levitt"}, ImageUrl = "1.jpg", GenreId = 4},
+                new Movie(){MovieId = 2, Title = "Interstellar", Description = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Director = "Christopher Nolan", Actors = new string[]{"Matthew McConaughey", "Anne Hathaway"}, ImageUrl = "2.jpg", GenreId = 4},
+                new Movie(){MovieId = 3, Title = "John Wick 4", Description = "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.", Director = "Chad Stahelski", Actors = new string[]{"Keanu Reeves", "Laurence Fishburne"}, ImageUrl = "3.jpg", GenreId = 3},
+                new Movie(){MovieId = 4, Title = "Knives Out", Description = "A detective investigates the death of the patriarch of an eccentric, combative family.", Director = "Rian Johnson", Actors = new string[]{"Daniel Craig", "Ana de Armas"}, ImageUrl = "4.jpg", GenreId = 2},
+                new Movie(){MovieId = 5, Title = "Eternal Sunshine of the Spotless Mind", Description = "When their relationship turns sour, a couple undergoes a medical procedure to have each other erased from their memories for ever.", Director = "Michel Gondry", Actors = new string[]{"Jm Carrey", "Kate Winslet"}, ImageUrl = "5.jpg", GenreId = 4},
+                new Movie(){MovieId = 6, Title = "The Dictator", Description = "The heroic story of a dictator who risked his life to ensure that democracy would never come to the country he so lovingly oppressed.", Director = "Larry Charles", Actors = new string[]{"Sacha Baron Cohen", "Anna Faris"}, ImageUrl = "6.jpg", GenreId = 2}
             };
         }
 
