@@ -8,27 +8,14 @@ namespace MovieApp.Controllers
     //controller
     public class MoviesController : Controller
     {
-        //action
-        //localhost:7033/movies/list
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-
-        //localhost:7033/movies/list
-        //localhost:7033/movies/list/1
         [HttpGet]
         public IActionResult List(int? id, string q)
         {
-            // {controller}/{action}/{id?}
-            // movies/list/2
-
-            //var controller = RouteData.Values["controller"];
-            //var action = RouteData.Values["action"];
-            //var genreid = RouteData.Values["id"];
-            //var word = HttpContext.Request.Query["q"].ToString();
-
             var movies = MovieRepository.Movies;
 
             if (id != null)
@@ -48,8 +35,6 @@ namespace MovieApp.Controllers
 
             return View("Movies", model);
         }
-
-        //localhost:7033/movies/details/1
         [HttpGet]
         public IActionResult Details(int id)
         {
@@ -65,16 +50,13 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult Create(Movie m)
         {
-            // Model Binding
-
-            //var m = new Movie()
-            //{
-            //    Title = Title, Description = Description, Director = Director, ImageUrl = ImageUrl, GenreId = GenreId
-            //};
-
-            MovieRepository.Add(m);
-
-            return RedirectToAction("List");
+            if (ModelState.IsValid)
+            {
+                MovieRepository.Add(m);
+                return RedirectToAction("List");
+            }
+            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
+            return View();
         }
 
         [HttpGet]
@@ -87,10 +69,13 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult Edit(Movie m)
         {
-            MovieRepository.Edit(m);
-
-            // /movies/details/1
-            return RedirectToAction("Details", "Movies", new {@id=m.MovieId});
+            if (ModelState.IsValid)
+            {
+                MovieRepository.Edit(m);
+                return RedirectToAction("Details", "Movies", new { @id = m.MovieId });
+            }
+            ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
+            return View(m);
         }
     }
 }

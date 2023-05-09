@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace MovieApp.Models
 {
@@ -6,14 +7,17 @@ namespace MovieApp.Models
     {
         public int MovieId { get; set; }
         [DisplayName("Movie Name")]
-        public string Title { get; set; }
+        [Required(ErrorMessage = "Movie title is required")]
+        [StringLength(50,ErrorMessage = "Title can not be longer than 50 characters")]
+        public string Title { get; set; } // null
+        [Required(ErrorMessage = "Movie description is required")]
         public string Description { get; set; }
         public string Director { get; set; }
 
         public string[] Actors { get; set; }
-        
-        public string ImageUrl { get; set; }
-
-        public int GenreId { get; set; }
+        [Required]
+        public string ImageUrl { get; set; } // null
+        [Required]
+        public int? GenreId { get; set; } // null
     }
 }
