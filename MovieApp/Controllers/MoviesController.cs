@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MovieApp.Data;
 using MovieApp.Models;
@@ -76,6 +77,13 @@ namespace MovieApp.Controllers
             }
             ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
             return View(m);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int MovieId)
+        {
+            MovieRepository.Delete(MovieId);
+            return RedirectToAction("List");
         }
     }
 }
