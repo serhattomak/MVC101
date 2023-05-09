@@ -54,6 +54,7 @@ namespace MovieApp.Controllers
             if (ModelState.IsValid)
             {
                 MovieRepository.Add(m);
+                TempData["Message"] = $"{m.Title} is added.";
                 return RedirectToAction("List");
             }
             ViewBag.Genres = new SelectList(GenreRepository.Genres, "GenreId", "Name");
@@ -80,9 +81,10 @@ namespace MovieApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(int MovieId)
+        public IActionResult Delete(int MovieId, string Title)
         {
             MovieRepository.Delete(MovieId);
+            TempData["Message"] = $"{Title} is deleted.";
             return RedirectToAction("List");
         }
     }

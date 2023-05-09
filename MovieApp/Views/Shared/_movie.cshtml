@@ -14,6 +14,7 @@
                     
                     
                     <form asp-controller="Movies" asp-action="Delete" method="post" style="display: inline">
+                        <input type="hidden" name="Title" value="@Model.Title"/>
                         <input type="hidden" name="MovieId" value="@Model.MovieId"/>
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>

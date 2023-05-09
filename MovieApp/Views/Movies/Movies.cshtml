@@ -1,8 +1,10 @@
 ﻿@model MoviesViewModel
 
 <h1>Movie List</h1>
+
+
 <div id="movies">
-    
+
     @if (Model.Movies.Count() > 0)
     {
         @foreach (var movie in Model.Movies)
@@ -16,8 +18,16 @@
     }
 </div>
 
-@section menu
+@if (TempData["Message"] != null)
 {
+    @section message
+    {
+    @await Html.PartialAsync("_message", (string)TempData["Message"])
+    }
+}
+
+@section menu
+    {
     @*@await Html.PartialAsync("_menu", Model.Genres)*@
     @await Component.InvokeAsync("Genres")
-}
+    }
