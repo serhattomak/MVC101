@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MovieApp.Data;
+using MovieApp.Entity;
 using MovieApp.Models;
 
 namespace MovieApp.Controllers
