@@ -14,7 +14,6 @@ namespace MovieApp.Entity
         [MaxLength(500)]
         public string Description { get; set; }
         public string Director { get; set; }
-        public string[] Actors { get; set; }
         public string ImageUrl { get; set; }
         [Required]
         public int GenreId { get; set; }
