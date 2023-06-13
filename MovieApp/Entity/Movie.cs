@@ -7,7 +7,7 @@ namespace MovieApp.Entity
     {
         // Primary Key => Id, <TypeName>Id
         
-
+        //[Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MovieId { get; set; }
         [Required]
         public string Title { get; set; }

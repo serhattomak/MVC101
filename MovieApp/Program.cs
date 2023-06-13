@@ -8,12 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MovieContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
-        option =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQLConnection"), option =>
         {
-            option.MigrationsAssembly(Assembly.GetAssembly(typeof(MovieContext)).GetName().Name); 
+            option.MigrationsAssembly(Assembly.GetAssembly(typeof(MovieContext)).GetName().Name);
 
         });
+
+    //options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
+    //    option =>
+    //    {
+    //        option.MigrationsAssembly(Assembly.GetAssembly(typeof(MovieContext)).GetName().Name); 
+
+    //    });
 });
 
 builder.Services.AddControllersWithViews();
