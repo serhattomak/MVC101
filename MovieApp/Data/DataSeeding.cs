@@ -14,7 +14,7 @@ namespace MovieApp.Data
 
             var genres = new List<Genre>()
             {
-                new Genre {Name = "Adventure", Movies = 
+                new Genre {Name = "Adventure", Movies =
                     new List<Movie>()
                 {
                     new Movie()
@@ -89,6 +89,27 @@ namespace MovieApp.Data
                 }
 
             };
+            var users = new List<User>()
+            {
+                new User(){UserName = "usera", Email = "usera@gmail.com", Password = "1234", ImageUrl = "person1.jpg"},
+                new User(){UserName = "userb", Email = "userb@gmail.com", Password = "1234", ImageUrl = "person2.jpg"},
+                new User()
+                {
+                    UserName = "userc", Email = "userc@gmail.com", Password = "1234", ImageUrl = "person3.jpg",
+                    Person = new Person()
+                    {
+                        Name = "Person 1", Biography = "bio 1"
+                    }
+                },
+                new User()
+                {
+                UserName = "userd", Email = "userd@gmail.com", Password = "1234", ImageUrl = "person4.jpg",
+                Person = new Person()
+                {
+                    Name = "Person 2", Biography = "bio 2"
+                }
+            }
+            };
 
             if (context.Database.GetPendingMigrations().Count() == 0)
             {
@@ -102,7 +123,11 @@ namespace MovieApp.Data
                     context.Movies.AddRange(movies);
                 }
 
-                
+                if (context.Users.Count() == 0)
+                {
+                    context.Users.AddRange(users);
+                }
+
 
                 context.SaveChanges();
             }
