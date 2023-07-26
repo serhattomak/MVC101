@@ -94,21 +94,34 @@ namespace MovieApp.Data
                 new User(){UserName = "usera", Email = "usera@gmail.com", Password = "1234", ImageUrl = "person1.jpg"},
                 new User(){UserName = "userb", Email = "userb@gmail.com", Password = "1234", ImageUrl = "person2.jpg"},
                 new User()
-                {
-                    UserName = "userc", Email = "userc@gmail.com", Password = "1234", ImageUrl = "person3.jpg",
-                    Person = new Person()
-                    {
-                        Name = "Person 1", Biography = "bio 1"
-                    }
-                },
+                {UserName = "userc", Email = "userc@gmail.com", Password = "1234", ImageUrl = "person3.jpg"},
                 new User()
+                {UserName = "userd", Email = "userd@gmail.com", Password = "1234", ImageUrl = "person4.jpg"}
+            };
+            var people = new List<Person>()
+            {
+                new Person()
                 {
-                UserName = "userd", Email = "userd@gmail.com", Password = "1234", ImageUrl = "person4.jpg",
-                Person = new Person()
+                    Name = "Person 1",
+                    Biography = "bio 1",
+                    User = users[0]
+                },
+                new Person()
                 {
-                    Name = "Person 2", Biography = "bio 2"
+                    Name = "Person 2", 
+                    Biography = "bio 2",
+                    User = users[1]
                 }
-            }
+            };
+            var crews = new List<Crew>()
+            {
+                new Crew(){Movie = movies[0], Person = people[0],Job = "Director"},
+                new Crew(){Movie = movies[0], Person = people[1],Job = "Co-Director"}
+            };
+            var casts = new List<Cast>()
+            {
+                new Cast(){Movie = movies[0], Person = people[0], Name = "Actor Name 1", Character = "Character 1"},
+                new Cast(){Movie = movies[0], Person = people[1], Name = "Actor Name 2", Character = "Character 2"}
             };
 
             if (context.Database.GetPendingMigrations().Count() == 0)
@@ -126,6 +139,21 @@ namespace MovieApp.Data
                 if (context.Users.Count() == 0)
                 {
                     context.Users.AddRange(users);
+                }
+
+                if (context.People.Count() == 0)
+                {
+                    context.People.AddRange(people);
+                }
+
+                if (context.Casts.Count() == 0)
+                {
+                    context.Casts.AddRange(casts);
+                }
+
+                if (context.Crews.Count() == 0)
+                {
+                    context.Crews.AddRange(crews);
                 }
 
 
