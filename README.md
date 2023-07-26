@@ -37,7 +37,7 @@ The repository is organized as follows:
 
 If you have any suggestions, tips, or just want to connect, feel free to reach out!
 
-- 📧 Email: mailto:serhattomak@gmail.com
+- 📧 Email: serhattomak@gmail.com
 - 📱 LinkedIn: (https://www.linkedin.com/in/serhattomak)
 
 ---
