@@ -45,7 +45,7 @@ namespace MovieApp.Data
                     Description =
                         "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
                     ImageUrl = "1.jpg",
-                    Genre= genres[0]
+                    Genres = new List<Genre>(){genres[0], new Genre(){Name = "New Genre"}, genres[1] }
                 },
                 new Movie()
                 {
@@ -53,7 +53,7 @@ namespace MovieApp.Data
                     Description =
                         "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
                     ImageUrl = "2.jpg",
-                    Genre=genres[1]
+                    Genres = new List<Genre>(){genres[0],  genres[2] }
                 },
                 new Movie()
                 {
@@ -61,7 +61,7 @@ namespace MovieApp.Data
                     Description =
                         "John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.",
                     ImageUrl = "3.jpg",
-                    Genre=genres[1]
+                    Genres = new List<Genre>(){genres[1],  genres[3] }
                 },
                 new Movie()
                 {
@@ -69,7 +69,7 @@ namespace MovieApp.Data
                     Description =
                         "A detective investigates the death of the patriarch of an eccentric, combative family.",
                     ImageUrl = "4.jpg",
-                    Genre=genres[2]
+                    Genres = new List<Genre>(){genres[2],  genres[4] }
                 },
                 new Movie()
                 {
@@ -77,7 +77,7 @@ namespace MovieApp.Data
                     Description =
                         "When their relationship turns sour, a couple undergoes a medical procedure to have each other erased from their memories for ever.",
                     ImageUrl = "5.jpg",
-                    Genre=genres[2]
+                    Genres = new List<Genre>(){genres[1],  genres[2] }
                 },
                 new Movie()
                 {
@@ -85,7 +85,7 @@ namespace MovieApp.Data
                     Description =
                         "The heroic story of a dictator who risked his life to ensure that democracy would never come to the country he so lovingly oppressed.",
                     ImageUrl = "6.jpg",
-                    Genre=genres[3]
+                    Genres = new List<Genre>(){genres[3],  genres[4] }
                 }
 
             };

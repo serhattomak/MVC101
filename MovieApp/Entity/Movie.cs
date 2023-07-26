@@ -14,8 +14,7 @@ namespace MovieApp.Entity
         [MaxLength(500)]
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        [Required]
-        public Genre Genre { get; set; } // navigation property
-        public int GenreId { get; set; }
+        [Required] 
+        public List<Genre> Genres { get; set; }
     }
 }
