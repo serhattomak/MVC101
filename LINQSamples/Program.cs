@@ -99,16 +99,40 @@ namespace LINQSamples
 
                 //var result = db.Products.OrderBy(p => p.UnitPrice).ToList();
                 //var result = db.Products.OrderByDescending(p => p.UnitPrice).ToList();
-                var result = db.Products.OrderByDescending(p => p.UnitPrice).LastOrDefault();
+                //var result = db.Products.OrderByDescending(p => p.UnitPrice).LastOrDefault();
 
-                Console.WriteLine(result.ProductName + " " + result.UnitPrice);
+                //Console.WriteLine(result.ProductName + " " + result.UnitPrice);
 
                 //foreach (var item in result)
                 //{
                 //    Console.WriteLine(item.ProductName + " " + item.UnitPrice);
                 //}
 
-                Console.WriteLine(result);
+                //Console.WriteLine(result);
+
+                var category = db.Categories.Where(i => i.CategoryName == "Beverages").FirstOrDefault();
+
+                var p1 = new Product() { ProductName = "new item 11 "};
+                var p2 = new Product() { ProductName = "new item 12 "};
+
+                //var p1 = new Product() { ProductName = "new item 9", Category = new Category() { CategoryName = "New Category 1" } };
+                //var p2 = new Product() { ProductName = "new item 10", Category = new Category() { CategoryName = "New Category 2" } };
+
+                //var products = new List<Product>()
+                //{
+                //    p1, p2
+                //};
+
+                category.Products.Add(p1);
+                category.Products.Add(p2);
+
+                //db.Products.AddRange(products);
+
+                db.SaveChanges();
+
+                Console.WriteLine("Items have been added.");
+                Console.WriteLine(p1.ProductId);
+                Console.WriteLine(p2.ProductId);
             }
 
             Console.ReadLine();
