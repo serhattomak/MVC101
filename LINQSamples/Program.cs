@@ -18,18 +18,42 @@ namespace LINQSamples
         {
             using (var db = new NorthwindContext())
             {
-                var product = db.Products.Find(1);
+                var p1 = new Product() { ProductId = 86 };
+                var p2 = new Product() { ProductId = 85 };
 
-                if (product!=null)
-                {
-                    product.UnitPrice = 28;
+                var products = new List<Product>() { p1, p2 };
 
-                    db.Update(product);
-                    db.SaveChanges();
-                }
+                //db.Entry(p).State = EntityState.Deleted;
+                db.Products.RemoveRange(products);
+
+                db.SaveChanges();
             }
 
             Console.ReadLine();
+        }
+
+        private static void Lesson9(NorthwindContext db)
+        {
+            //var p = db.Products.Find(88);
+
+            //if (p != null)
+            //{
+            //    db.Products.Remove(p);
+            //    db.SaveChanges();
+            //}
+        }
+
+        private static void Lesson8(NorthwindContext db)
+        {
+            //var product = db.Products.Find(1);
+
+            //if (product != null)
+            //{
+            //    product.UnitPrice = 28;
+
+            //    db.Update(product);
+            //    db.SaveChanges();
+            //}
         }
 
         private static void Lesson7(NorthwindContext db)
