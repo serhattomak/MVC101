@@ -79,12 +79,36 @@ namespace LINQSamples
 
                 //TAKE SECOND 5 VALUES
 
-                var products = db.Products.Skip(5).Take(5).ToList();
+                //var products = db.Products.Skip(5).Take(5).ToList();
 
-                foreach (var p in products)
-                {
-                    Console.WriteLine(p.ProductName + " " + p.ProductId);
-                }
+                //foreach (var p in products)
+                //{
+                //    Console.WriteLine(p.ProductName + " " + p.ProductId);
+                //}
+
+
+                //var results = db.Products.Count();
+                //var result = db.Products.Count(i=>i.UnitPrice>10 && i.UnitPrice<30);
+                //var result = db.Products.Count(i => !i.Discontinued);
+
+                //var result = db.Products.Min(p => p.UnitPrice);
+                //var result = db.Products.Where(p=>p.CategoryId==2).Max(p => p.UnitPrice);
+
+                //var result = db.Products.Where(p => !p.Discontinued).Average(p => p.UnitPrice);
+                //var result = db.Products.Where(p => !p.Discontinued).Sum(p => p.UnitPrice);
+
+                //var result = db.Products.OrderBy(p => p.UnitPrice).ToList();
+                //var result = db.Products.OrderByDescending(p => p.UnitPrice).ToList();
+                var result = db.Products.OrderByDescending(p => p.UnitPrice).LastOrDefault();
+
+                Console.WriteLine(result.ProductName + " " + result.UnitPrice);
+
+                //foreach (var item in result)
+                //{
+                //    Console.WriteLine(item.ProductName + " " + item.UnitPrice);
+                //}
+
+                Console.WriteLine(result);
             }
 
             Console.ReadLine();
