@@ -18,18 +18,51 @@ namespace LINQSamples
         {
             using (var db = new NorthwindContext())
             {
-                var p1 = new Product() { ProductId = 86 };
-                var p2 = new Product() { ProductId = 85 };
+                //var products = db.Products.Where(p => p.CategoryId == 1).ToList();
+                //var products = db.Products.Include(p=>p.Category).Where(p => p.Category.CategoryName == "Beverages").ToList();
+                //var products = db.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { name = p.ProductName, id = p.CategoryId, categoryName = p.Category.CategoryName }).ToList();
 
-                var products = new List<Product>() { p1, p2 };
+                //var categories = db.Categories.Where(c => c.Products.Count() == 0).ToList();
+                //var categories = db.Categories.Where(c => c.Products.Any()).ToList();
 
-                //db.Entry(p).State = EntityState.Deleted;
-                db.Products.RemoveRange(products);
+                //var products = db.Products.Select(p => new {companyName=p.Supplier.CompanyName, contactName=p.Supplier.ContactName, p.ProductName }).ToList();
 
-                db.SaveChanges();
+                // extension methods
+                // query expressions
+
+                //var products = (from p in db.Products where p.UnitPrice>10
+                //    select p).ToList();
+
+                var products = (from p in db.Products
+                    join s in db.Suppliers on p.SupplierId equals s.SupplierId
+                    select new
+                {
+                    p.ProductName, contactName=s.ContactName, companyName=s.CompanyName
+                }).ToList();
+
+                //db.Products.Where(p=>p.UnitPrice>10).ToList();
+
+                foreach (var item in products)
+                {
+                    Console.WriteLine(item.ProductName + " " + item.companyName + " " + item.contactName);
+                }
+
             }
 
             Console.ReadLine();
+        }
+
+        private static void Lesson10(NorthwindContext db)
+        {
+            var p1 = new Product() { ProductId = 86 };
+            var p2 = new Product() { ProductId = 85 };
+
+            var products = new List<Product>() { p1, p2 };
+
+            //db.Entry(p).State = EntityState.Deleted;
+            db.Products.RemoveRange(products);
+
+            db.SaveChanges();
         }
 
         private static void Lesson9(NorthwindContext db)
@@ -140,74 +173,74 @@ namespace LINQSamples
 
         private static void Lesson3(NorthwindContext db)
         {
-           // // ALL CUSTOMERS' INFO
+            // // ALL CUSTOMERS' INFO
 
-           // var customers = db.Customers.ToList();
+            // var customers = db.Customers.ToList();
 
-           // foreach (var c in customers)
-           // {
-           //     Console.WriteLine(c.ContactName);
-           // }
+            // foreach (var c in customers)
+            // {
+            //     Console.WriteLine(c.ContactName);
+            // }
 
-           // // ALL CUSTOMERS' ID
+            // // ALL CUSTOMERS' ID
 
-           // var customerId = db.Customers.Select(c => new { c.CustomerId, c.ContactName }).ToList();
+            // var customerId = db.Customers.Select(c => new { c.CustomerId, c.ContactName }).ToList();
 
-           // foreach (var c in customerId)
-           // {
-           //     Console.WriteLine(c.CustomerId + ' ' + c.ContactName);
-           // }
+            // foreach (var c in customerId)
+            // {
+            //     Console.WriteLine(c.CustomerId + ' ' + c.ContactName);
+            // }
 
-           ////  CUSTOMERS WHO LIVE IN GERMANY
+            ////  CUSTOMERS WHO LIVE IN GERMANY
 
-           // var customerLocation = db.Customers.Select(c => new { c.ContactName, c.Country }).Where(c => c.Country == "Germany")
-           //     .ToList();
+            // var customerLocation = db.Customers.Select(c => new { c.ContactName, c.Country }).Where(c => c.Country == "Germany")
+            //     .ToList();
 
-           // foreach (var c in customerLocation)
-           // {
-           //     Console.WriteLine(c.Country + ' ' + c.ContactName);
-           // }
+            // foreach (var c in customerLocation)
+            // {
+            //     Console.WriteLine(c.Country + ' ' + c.ContactName);
+            // }
 
-           // // WHERE DOES "DIEGO ROEL" LIVE? var locationDiego =
-           //     db.Customers.Where(l => l.ContactName == "Diego Roel").FirstOrDefault();
+            // // WHERE DOES "DIEGO ROEL" LIVE? var locationDiego =
+            //     db.Customers.Where(l => l.ContactName == "Diego Roel").FirstOrDefault();
 
-           // Console.WriteLine(locationDiego.ContactName + " " + locationDiego.CompanyName);
+            // Console.WriteLine(locationDiego.ContactName + " " + locationDiego.CompanyName);
 
-           // // WHICH PRODUCTS HAVE 0 UNITS IN STOCK
+            // // WHICH PRODUCTS HAVE 0 UNITS IN STOCK
 
-           // var products = db.Products.Select(p => new { p.ProductName, p.UnitsInStock }).Where(p => p.UnitsInStock == 0)
-           //     .ToList();
+            // var products = db.Products.Select(p => new { p.ProductName, p.UnitsInStock }).Where(p => p.UnitsInStock == 0)
+            //     .ToList();
 
-           // foreach (var p in products)
-           // {
-           //     Console.WriteLine(p.ProductName + " " + p.UnitsInStock);
-           // }
+            // foreach (var p in products)
+            // {
+            //     Console.WriteLine(p.ProductName + " " + p.UnitsInStock);
+            // }
 
-           // // ALL EMPLOYEES' FIRST AND LAST NAME
+            // // ALL EMPLOYEES' FIRST AND LAST NAME
 
-           // var employees = db.Employees.Select(e => new { FullName = e.FirstName + ' ' + e.LastName });
-           // foreach (var e in employees)
-           // {
-           //     Console.WriteLine(e.FullName);
-           // }
+            // var employees = db.Employees.Select(e => new { FullName = e.FirstName + ' ' + e.LastName });
+            // foreach (var e in employees)
+            // {
+            //     Console.WriteLine(e.FullName);
+            // }
 
-           // // TAKE STARTING 5 VALUES
+            // // TAKE STARTING 5 VALUES
 
-           // var products = db.Products.Take(5).ToList();
+            // var products = db.Products.Take(5).ToList();
 
-           // foreach (var p in products)
-           // {
-           //     Console.WriteLine(p.ProductName + " " + p.ProductId);
-           // }
+            // foreach (var p in products)
+            // {
+            //     Console.WriteLine(p.ProductName + " " + p.ProductId);
+            // }
 
-           // // TAKE SECOND 5 VALUES
+            // // TAKE SECOND 5 VALUES
 
-           // var products = db.Products.Skip(5).Take(5).ToList();
+            // var products = db.Products.Skip(5).Take(5).ToList();
 
-           // foreach (var p in products)
-           // {
-           //     Console.WriteLine(p.ProductName + " " + p.ProductId);
-           // }
+            // foreach (var p in products)
+            // {
+            //     Console.WriteLine(p.ProductName + " " + p.ProductId);
+            // }
         }
 
         private static void Lesson2(NorthwindContext db)
