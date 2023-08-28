@@ -8,8 +8,29 @@ namespace LINQSamples
 
     class ProductModel
     {
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public decimal? Price { get; set; }
+        public int Quantity { get; set; }
+    }
+
+    class CustomerModel
+    {
+        public CustomerModel()
+        {
+            this.Orders = new List<OrderModel>();
+        }
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public int OrderCount { get; set; }
+        public List<OrderModel> Orders { get; set; }
+    }
+
+    class OrderModel
+    {
+        public int OrderId { get; set; }
+        public decimal Total { get; set; }
+        public List<ProductModel> Products { get; set; }
     }
 
     class Program
@@ -18,38 +39,76 @@ namespace LINQSamples
         {
             using (var db = new NorthwindContext())
             {
-                //var products = db.Products.Where(p => p.CategoryId == 1).ToList();
-                //var products = db.Products.Include(p=>p.Category).Where(p => p.Category.CategoryName == "Beverages").ToList();
-                //var products = db.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { name = p.ProductName, id = p.CategoryId, categoryName = p.Category.CategoryName }).ToList();
+                // Total orders from customers
 
-                //var categories = db.Categories.Where(c => c.Products.Count() == 0).ToList();
-                //var categories = db.Categories.Where(c => c.Products.Any()).ToList();
-
-                //var products = db.Products.Select(p => new {companyName=p.Supplier.CompanyName, contactName=p.Supplier.ContactName, p.ProductName }).ToList();
-
-                // extension methods
-                // query expressions
-
-                //var products = (from p in db.Products where p.UnitPrice>10
-                //    select p).ToList();
-
-                var products = (from p in db.Products
-                    join s in db.Suppliers on p.SupplierId equals s.SupplierId
-                    select new
+                var customers = db.Customers.Where(cus => cus.CustomerId == "PERIC").Select(cus => new CustomerModel()
                 {
-                    p.ProductName, contactName=s.ContactName, companyName=s.CompanyName
-                }).ToList();
+                    CustomerId = cus.CustomerId,
+                    CustomerName = cus.ContactName,
+                    OrderCount = cus.Orders.Count,
+                    Orders = cus.Orders.Select(order => new OrderModel()
+                    {
+                        OrderId = order.OrderId,
+                        Total = order.OrderDetails.Sum(od => od.Quantity * od.UnitPrice),
+                        Products = order.OrderDetails.Select(od => new ProductModel()
+                        {
+                            ProductId = od.ProductId,
+                            Name = od.Product.ProductName,
+                            Price = od.UnitPrice,
+                            Quantity = od.Quantity
+                        }).ToList()
+                    }).ToList()
+                }).OrderBy(i => i.OrderCount).ToList();
 
-                //db.Products.Where(p=>p.UnitPrice>10).ToList();
-
-                foreach (var item in products)
+                foreach (var customer in customers)
                 {
-                    Console.WriteLine(item.ProductName + " " + item.companyName + " " + item.contactName);
+                    Console.WriteLine(customer.CustomerId + " => " + customer.CustomerName + " => " + customer.OrderCount);
+                    Console.WriteLine("Orders");
+                    foreach (var order in customer.Orders)
+                    {
+                        Console.WriteLine("*********************");
+                        Console.WriteLine(order.OrderId + "=>" + order.Total);
+                        foreach (var product in order.Products)
+                        {
+                            Console.WriteLine(product.ProductId + " => " + product.Name + " => " + product.Price + " => " + product.Quantity);
+                        }
+                    }
                 }
-
             }
 
             Console.ReadLine();
+        }
+
+        private static void Lesson11(NorthwindContext db)
+        {
+            //var products = db.Products.Where(p => p.CategoryId == 1).ToList();
+            //var products = db.Products.Include(p=>p.Category).Where(p => p.Category.CategoryName == "Beverages").ToList();
+            //var products = db.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { name = p.ProductName, id = p.CategoryId, categoryName = p.Category.CategoryName }).ToList();
+
+            //var categories = db.Categories.Where(c => c.Products.Count() == 0).ToList();
+            //var categories = db.Categories.Where(c => c.Products.Any()).ToList();
+
+            //var products = db.Products.Select(p => new {companyName=p.Supplier.CompanyName, contactName=p.Supplier.ContactName, p.ProductName }).ToList();
+
+            // extension methods
+            // query expressions
+
+            //var products = (from p in db.Products where p.UnitPrice>10
+            //    select p).ToList();
+
+            //var products = (from p in db.Products
+            //    join s in db.Suppliers on p.SupplierId equals s.SupplierId
+            //    select new
+            //    {
+            //        p.ProductName, contactName = s.ContactName, companyName = s.CompanyName
+            //    }).ToList();
+
+            ////db.Products.Where(p=>p.UnitPrice>10).ToList();
+
+            //foreach (var item in products)
+            //{
+            //    Console.WriteLine(item.ProductName + " " + item.companyName + " " + item.contactName);
+            //}
         }
 
         private static void Lesson10(NorthwindContext db)
