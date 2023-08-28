@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 namespace LINQSamples
 {
 
-    class ProductModel
+    public class ProductModel
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
         public decimal? Price { get; set; }
-        public int Quantity { get; set; }
+        //public int Quantity { get; set; }
     }
 
     class CustomerModel
@@ -37,46 +37,64 @@ namespace LINQSamples
     {
         static void Main(string[] args)
         {
-            using (var db = new NorthwindContext())
+            using (var db = new CustomNorthwindContext())
             {
-                // Total orders from customers
+                //var result=db.Database.ExecuteSqlRaw("delete from products where productID=84");
+                //var result = db.Database.ExecuteSqlRaw("update products set unitprice=unitprice*1.2 where categoryId=4");
+                //var query = "4";
 
-                var customers = db.Customers.Where(cus => cus.CustomerId == "PERIC").Select(cus => new CustomerModel()
-                {
-                    CustomerId = cus.CustomerId,
-                    CustomerName = cus.ContactName,
-                    OrderCount = cus.Orders.Count,
-                    Orders = cus.Orders.Select(order => new OrderModel()
-                    {
-                        OrderId = order.OrderId,
-                        Total = order.OrderDetails.Sum(od => od.Quantity * od.UnitPrice),
-                        Products = order.OrderDetails.Select(od => new ProductModel()
-                        {
-                            ProductId = od.ProductId,
-                            Name = od.Product.ProductName,
-                            Price = od.UnitPrice,
-                            Quantity = od.Quantity
-                        }).ToList()
-                    }).ToList()
-                }).OrderBy(i => i.OrderCount).ToList();
+                //var products = db.Products.FromSqlRaw($"select * from products where categoryId={query}").ToList();
 
-                foreach (var customer in customers)
+                var products = db.ProductModels.FromSqlRaw("select ProductId, ProductName, UnitPrice from Products").ToList();
+
+                foreach (var item in products)
                 {
-                    Console.WriteLine(customer.CustomerId + " => " + customer.CustomerName + " => " + customer.OrderCount);
-                    Console.WriteLine("Orders");
-                    foreach (var order in customer.Orders)
-                    {
-                        Console.WriteLine("*********************");
-                        Console.WriteLine(order.OrderId + "=>" + order.Total);
-                        foreach (var product in order.Products)
-                        {
-                            Console.WriteLine(product.ProductId + " => " + product.Name + " => " + product.Price + " => " + product.Quantity);
-                        }
-                    }
+                    Console.WriteLine(item.Name + " => " + item.Price);
                 }
+
             }
 
             Console.ReadLine();
+        }
+
+        private static void Lesson12(NorthwindContext db)
+        {
+            //// Total orders from customers
+
+            //var customers = db.Customers.Where(cus => cus.CustomerId == "PERIC").Select(cus => new CustomerModel()
+            //{
+            //    CustomerId = cus.CustomerId,
+            //    CustomerName = cus.ContactName,
+            //    OrderCount = cus.Orders.Count,
+            //    Orders = cus.Orders.Select(order => new OrderModel()
+            //    {
+            //        OrderId = order.OrderId,
+            //        Total = order.OrderDetails.Sum(od => od.Quantity * od.UnitPrice),
+            //        Products = order.OrderDetails.Select(od => new ProductModel()
+            //        {
+            //            ProductId = od.ProductId,
+            //            Name = od.Product.ProductName,
+            //            Price = od.UnitPrice,
+            //            Quantity = od.Quantity
+            //        }).ToList()
+            //    }).ToList()
+            //}).OrderBy(i => i.OrderCount).ToList();
+
+            //foreach (var customer in customers)
+            //{
+            //    Console.WriteLine(customer.CustomerId + " => " + customer.CustomerName + " => " + customer.OrderCount);
+            //    Console.WriteLine("Orders");
+            //    foreach (var order in customer.Orders)
+            //    {
+            //        Console.WriteLine("*********************");
+            //        Console.WriteLine(order.OrderId + "=>" + order.Total);
+            //        foreach (var product in order.Products)
+            //        {
+            //            Console.WriteLine(product.ProductId + " => " + product.Name + " => " + product.Price + " => " +
+            //                              product.Quantity);
+            //        }
+            //    }
+            //}
         }
 
         private static void Lesson11(NorthwindContext db)
