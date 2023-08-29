@@ -39,22 +39,26 @@ namespace LINQSamples
         {
             using (var db = new CustomNorthwindContext())
             {
-                //var result=db.Database.ExecuteSqlRaw("delete from products where productID=84");
-                //var result = db.Database.ExecuteSqlRaw("update products set unitprice=unitprice*1.2 where categoryId=4");
-                //var query = "4";
-
-                //var products = db.Products.FromSqlRaw($"select * from products where categoryId={query}").ToList();
-
-                var products = db.ProductModels.FromSqlRaw("select ProductId, ProductName, UnitPrice from Products").ToList();
-
-                foreach (var item in products)
-                {
-                    Console.WriteLine(item.Name + " => " + item.Price);
-                }
-
+                
             }
 
             Console.ReadLine();
+        }
+
+        private static void Lesson13(CustomNorthwindContext db)
+        {
+            //var result=db.Database.ExecuteSqlRaw("delete from products where productID=84");
+            //var result = db.Database.ExecuteSqlRaw("update products set unitprice=unitprice*1.2 where categoryId=4");
+            //var query = "4";
+
+            //var products = db.Products.FromSqlRaw($"select * from products where categoryId={query}").ToList();
+
+            var products = db.ProductModels.FromSqlRaw("select ProductId, ProductName, UnitPrice from Products").ToList();
+
+            foreach (var item in products)
+            {
+                Console.WriteLine(item.Name + " => " + item.Price);
+            }
         }
 
         private static void Lesson12(NorthwindContext db)
