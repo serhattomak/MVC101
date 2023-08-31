@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+﻿@*<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
     <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler">
             <span class="navbar-toggler-icon"></span>
@@ -7,16 +7,43 @@
             <a href="/" class="navbar-brand">MovieApp</a>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="/movies/list" class="nav-link">Movies</a>
+                    <a href="/movies/list" class="nav-link active">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/movies/create" class="nav-link">Create Movie</a>
+                    <a href="/movies/create" class="nav-link active">Create Movie</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/admin/movielist" class="nav-link">Admin Movies</a>
+                    <a href="/admin/movielist" class="nav-link active">Admin Movies</a>
                 </li>
             </ul>
 
+            <form action="/movies/list" method="get" class="form-inline">
+                <input type="text" name="q" placeholder="Search Movie" class="form-inline mr-2" />
+                <button type="submit" class="btn btn-outline-light mr-0">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>*@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">MovieApp</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/movies/list">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/movies/create">Create Movie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/movielist">Admin Movies</a>
+                </li>
+            </ul>
+            
             <form action="/movies/list" method="get" class="form-inline">
                 <input type="text" name="q" placeholder="Search Movie" class="form-inline mr-2" />
                 <button type="submit" class="btn btn-outline-light mr-0">Search</button>
