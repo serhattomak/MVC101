@@ -48,16 +48,16 @@ namespace MovieApp.Controllers
         [HttpPost]
         public IActionResult MovieUpdate(AdminEditMovieViewModel model, int[] genreIds)
         {
-            var entity = _context.Movies.Include("Genres").FirstOrDefault(m=>m.MovieId==model.MovieId);
+            var entity = _context.Movies.Include("Genres").FirstOrDefault(m => m.MovieId == model.MovieId);
 
             if (entity == null)
             {
                 return NotFound();
             }
 
-            entity.Title=model.Title;
+            entity.Title = model.Title;
             entity.Description = model.Description;
-            entity.ImageUrl=model.ImageUrl;
+            entity.ImageUrl = model.ImageUrl;
             entity.Genres = genreIds.Select(id => _context.Genres.FirstOrDefault(i => i.GenreId == id)).ToList();
 
             _context.SaveChanges();
@@ -75,6 +75,19 @@ namespace MovieApp.Controllers
                     Title = m.Title,
                     ImageUrl = m.ImageUrl,
                     Genres = m.Genres.ToList()
+                }).ToList()
+            });
+        }
+
+        public IActionResult GenreList()
+        {
+            return View(new AdminGenresViewModel()
+            {
+                Genres = _context.Genres.Select(g=> new AdminGenreViewModel()
+                {
+                    GenreId = g.GenreId,
+                    Name = g.Name,
+                    Count = g.Movies.Count
                 }).ToList()
             });
         }
