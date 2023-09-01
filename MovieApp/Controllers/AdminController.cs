@@ -83,13 +83,42 @@ namespace MovieApp.Controllers
         {
             return View(new AdminGenresViewModel()
             {
-                Genres = _context.Genres.Select(g=> new AdminGenreViewModel()
+                Genres = _context.Genres.Select(g => new AdminGenreViewModel()
                 {
                     GenreId = g.GenreId,
                     Name = g.Name,
                     Count = g.Movies.Count
                 }).ToList()
             });
+        }
+
+        public IActionResult GenreUpdate(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var entity = _context.Genres
+                .Select(g => new AdminGenreEditViewModel()
+                {
+                    GenreId = g.GenreId,
+                    Name = g.Name,
+                    Movies = g.Movies.Select(i => new AdminMovieViewModel()
+                    {
+                        MovieId = i.MovieId,
+                        Title = i.Title,
+                        ImageUrl = i.ImageUrl
+                    }).ToList()
+                })
+                .FirstOrDefault(g => g.GenreId == id);
+
+            if (entity==null)
+            {
+                return NotFound();
+            }
+
+            return View(entity);
         }
     }
 }
